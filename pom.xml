@@ -6,11 +6,11 @@
 
     <groupId>ani.rss</groupId>
     <artifactId>ani-rss</artifactId>
-    <version>1.1.300</version>
+    <version>1.1.307</version>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -112,7 +112,7 @@
                             <icon>ui/public/favicon.ico</icon>
                             <jre>
                                 <path>jre/bin;%JAVA_HOME%;%PATH%</path>
-                                <minVersion>11</minVersion>
+                                <minVersion>17</minVersion>
                             </jre>
                         </configuration>
                     </execution>

@@ -29,7 +29,16 @@
         </el-form-item>
         <el-form-item label="TMDB">
           <div style="display: flex;width: 100%;justify-content: space-between;">
-            <el-input v-model:model-value="props.ani.themoviedbName" disabled/>
+            <div class="el-input is-disabled">
+              <div class="el-input__wrapper" tabindex="-1"
+                   style="pointer-events: auto;cursor: auto;justify-content: left;">
+                <el-link v-if="props.ani?.tmdb?.id" type="primary"
+                         :href="`https://www.themoviedb.org/tv/${props.ani.tmdb.id}`" target="_blank">
+                  {{ props.ani.themoviedbName }}
+                </el-link>
+                <span v-else>{{ props.ani.themoviedbName }}</span>
+              </div>
+            </div>
             <div style="width: 4px;"></div>
             <el-button icon="Refresh" bg text @click="getThemoviedbName" :loading="getThemoviedbNameLoading"/>
           </div>
@@ -182,10 +191,11 @@ let getThemoviedbName = () => {
   }
 
   getThemoviedbNameLoading.value = true
-  api.get(`api/tmdb?method=getThemoviedbName&name=${props.ani.title}&type=${props.ani.ova ? 'movie' : 'tv'}`)
+  api.post('api/tmdb?method=getThemoviedbName', props.ani)
       .then(res => {
         ElMessage.success(res.message)
-        props.ani.themoviedbName = res.data
+        props.ani['themoviedbName'] = res.data['themoviedbName']
+        props.ani['tmdb'] = res.data['tmdb']
       })
       .finally(() => {
         getThemoviedbNameLoading.value = false
